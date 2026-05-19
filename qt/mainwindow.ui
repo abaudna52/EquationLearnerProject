@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1380</width>
+    <height>840</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>EquationLearner — Нелинейные уравнения</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainLayout">
+    <property name="spacing">
+     <number>8</number>
+    </property>
+    <property name="leftMargin">
+     <number>12</number>
+    </property>
+    <property name="topMargin">
+     <number>12</number>
+    </property>
+    <property name="rightMargin">
+     <number>12</number>
+    </property>
+    <property name="bottomMargin">
+     <number>8</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="keyRow">
+      <item>
+       <widget class="QLabel" name="urlLabel">
+        <property name="text">
+         <string>URL:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="urlEdit">
+        <property name="minimumSize">
+         <size><width>260</width><height>0</height></size>
+        </property>
+        <property name="maximumSize">
+         <size><width>400</width><height>16777215</height></size>
+        </property>
+        <property name="placeholderText">
+         <string>https://api.deepseek.com/v1/chat/completions</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="modelLabel">
+        <property name="text">
+         <string>Модель:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="modelEdit">
+        <property name="minimumSize">
+         <size><width>180</width><height>0</height></size>
+        </property>
+        <property name="maximumSize">
+         <size><width>280</width><height>16777215</height></size>
+        </property>
+        <property name="placeholderText">
+         <string>deepseek-chat</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="keyLabel">
+        <property name="text">
+         <string>Ключ:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="keyEdit">
+        <property name="minimumSize">
+         <size><width>200</width><height>0</height></size>
+        </property>
+        <property name="maximumSize">
+         <size><width>320</width><height>16777215</height></size>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::EchoMode::Password</enum>
+        </property>
+        <property name="placeholderText">
+         <string>sk-...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="inputGroup">
+      <property name="title">
+       <string>Введите уравнение или псевдокод</string>
+      </property>
+      <layout class="QHBoxLayout" name="inputRow">
+       <item>
+        <widget class="QLineEdit" name="inputEdit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="placeholderText">
+          <string>Например:  x^3 - 2*x + 1 = 0   или   sin(x) - x/2 = 0</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="methodLabel">
+         <property name="text">
+          <string>Метод:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="methodCombo">
+         <property name="minimumSize">
+          <size><width>170</width><height>36</height></size>
+         </property>
+         <property name="maximumSize">
+          <size><width>210</width><height>36</height></size>
+         </property>
+         <item>
+          <property name="text"><string>Авто (AI выбирает)</string></property>
+         </item>
+         <item>
+          <property name="text"><string>Метод Ньютона</string></property>
+         </item>
+         <item>
+          <property name="text"><string>Метод бисекции</string></property>
+         </item>
+         <item>
+          <property name="text"><string>Метод секущих</string></property>
+         </item>
+         <item>
+          <property name="text"><string>Простая итерация</string></property>
+         </item>
+         <item>
+          <property name="text"><string>Аналитический</string></property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="analyzeBtn">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Анализировать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="contentLayout">
+      <property name="spacing">
+       <number>8</number>
+      </property>
+      <item>
+       <widget class="QGroupBox" name="historyGroup">
+        <property name="title">
+         <string>История запросов</string>
+        </property>
+        <property name="minimumSize">
+         <size><width>200</width><height>0</height></size>
+        </property>
+        <property name="maximumSize">
+         <size><width>240</width><height>16777215</height></size>
+        </property>
+        <layout class="QVBoxLayout" name="historyVLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>6</number>
+         </property>
+         <property name="topMargin">
+          <number>6</number>
+         </property>
+         <property name="rightMargin">
+          <number>6</number>
+         </property>
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QListWidget" name="historyList">
+           <property name="alternatingRowColors">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Нажмите на запрос, чтобы повторить его</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="clearHistoryBtn">
+           <property name="text">
+            <string>Очистить историю</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTabWidget" name="tabs">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="documentMode">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="analysisTab">
+         <attribute name="title">
+          <string>Анализ</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="analysisLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="analysisText">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>Здесь появится анализ уравнения...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="graphTab">
+         <attribute name="title">
+          <string>График</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="graphLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="algoTab">
+         <attribute name="title">
+          <string>Алгоритм</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="algoLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QScrollArea" name="scrollArea">
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="codeTab">
+         <attribute name="title">
+          <string>Код C++</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="codeLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="codeText">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>Здесь появится сгенерированный код C++...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
